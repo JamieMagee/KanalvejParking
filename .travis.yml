@@ -3,9 +3,9 @@ jdk: oraclejdk8
 
 android:
   components:
-    - platform-tools
-    - tools
+    - platform-tools-25.0.0
+    - tools-25.2.2
     - build-tools-25.0.0
     - android-25
 
-script: gradlew clean :app:generateDebugSources :app:generateDebugAndroidTestSources :app:mockableAndroidJar :app:prepareDebugUnitTestDependencies :app:compileDebugSources :app:compileDebugAndroidTestSources :app:compileDebugUnitTestSources
+script: ./gradlew clean :app:generateDebugSources :app:generateDebugAndroidTestSources :app:mockableAndroidJar :app:prepareDebugUnitTestDependencies :app:compileDebugSources :app:compileDebugAndroidTestSources :app:compileDebugUnitTestSources
