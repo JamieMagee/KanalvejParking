@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kanalvej Parking</string>
+    <string name="action_settings">Indstillinger</string>
+    <string name="employee_spaces">Personale</string>
+    <string name="guest_spaces">Gæst</string>
+    <string name="public_spaces">Offentlig</string>
+</resources>

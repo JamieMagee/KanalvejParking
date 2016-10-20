@@ -1,0 +1,34 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="pref_sync"
+        android:title="@string/sync_settings_title">
+
+        <ListPreference
+            android:defaultValue="@string/pref_sync_frequency_defaultvalue"
+            android:entries="@array/pref_sync_frequency_titles"
+            android:entryValues="@array/pref_sync_frequency_values"
+            android:key="sync_frequency"
+            android:title="@string/pref_title_sync_frequency"
+            android:summary=""/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="pref_notification"
+        android:title="@string/notification_settings_title">
+
+        <dk.jamiemagee.kanalvejparking.preferences.SliderPreference
+            android:defaultValue="0"
+            android:dialogMessage="@string/notification_distance_title"
+            android:entries="@array/timeListArray"
+            android:entryValues="@array/timeListValues"
+            android:key="time"
+            android:summary="Select distance from the office"
+            android:title="Distance" />
+
+        <dk.jamiemagee.kanalvejparking.preferences.TimePreference />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
