@@ -31,7 +31,7 @@
     <string name="notification_settings_title">Notifications</string>
 
     <string name="notification_distance_title">Distance</string>
-    <string-array name="timeListArray">
+    <string-array name="distanceListArray">
         <item>Never</item>
         <item>500m</item>
         <item>1km</item>
@@ -39,8 +39,8 @@
         <item>5km</item>
     </string-array>
 
-    <!--This is going to be in seconds-->
-    <string-array name="timeListValues">
+    <!--This is going to be in metres-->
+    <string-array name="distanceListValues">
         <item>0</item>
         <item>500</item>
         <item>1000</item>

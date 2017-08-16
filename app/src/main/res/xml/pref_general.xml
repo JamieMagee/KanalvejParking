@@ -21,9 +21,9 @@
         <dk.jamiemagee.kanalvejparking.preferences.SliderPreference
             android:defaultValue="0"
             android:dialogMessage="@string/notification_distance_title"
-            android:entries="@array/timeListArray"
-            android:entryValues="@array/timeListValues"
-            android:key="time"
+            android:entries="@array/distanceListArray"
+            android:entryValues="@array/distanceListValues"
+            android:key="distance"
             android:summary="Select distance from the office"
             android:title="Distance" />
 
