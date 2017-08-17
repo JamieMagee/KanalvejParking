@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     SwipeRefreshLayout refreshLayout;
     ParkingSpaces parkingSpaces = new ParkingSpaces();
-    Timer timer = new Timer();
+    final Timer timer = new Timer();
     ParkingSpacesTimerTask parkingSpacesTimerTask = new ParkingSpacesTimerTask(this);
     int delay;
 

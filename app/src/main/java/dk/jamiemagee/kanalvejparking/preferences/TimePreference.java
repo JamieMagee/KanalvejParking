@@ -15,7 +15,7 @@ import java.util.GregorianCalendar;
 import dk.jamiemagee.kanalvejparking.R;
 
 public class TimePreference extends DialogPreference {
-    private Calendar calendar;
+    private final Calendar calendar;
     private TimePicker picker = null;
 
     public TimePreference(Context ctxt) {

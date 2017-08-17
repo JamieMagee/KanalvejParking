@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -25,18 +24,15 @@ import javax.net.ssl.HttpsURLConnection;
 import dk.jamiemagee.kanalvejparking.activities.MainActivity;
 import dk.jamiemagee.kanalvejparking.models.ParkingSpaces;
 
-import static android.content.Context.NOTIFICATION_SERVICE;
-
 public final class GetParkingTask extends AsyncTask<Void, Void, ParkingSpaces> {
 
     private static final String parkingServiceUrl = "https://kanalvejparking.azurewebsites.net/api/ParkingSpaces";
 
-    private MainActivity mainActivity;
+    private final MainActivity mainActivity;
 
-    private Context mContext;
-    private int NOTIFICATION_ID = 1;
-    private Notification mNotification;
-    private NotificationManager mNotificationManager;
+    private final int NOTIFICATION_ID = 1;
+
+    private NotificationManager notificationmanager;
 
     public GetParkingTask(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
@@ -55,8 +51,6 @@ public final class GetParkingTask extends AsyncTask<Void, Void, ParkingSpaces> {
             finally {
                 urlConnection.disconnect();
             }
-        } catch (MalformedURLException e) {
-            // ignored
         } catch (IOException e) {
 
         }
@@ -68,12 +62,10 @@ public final class GetParkingTask extends AsyncTask<Void, Void, ParkingSpaces> {
         StringBuilder response = new StringBuilder();
         try {
             reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
-            String line = "";
+            String line;
             while ((line = reader.readLine()) != null) {
                 response.append(line);
             }
-        } catch (UnsupportedEncodingException e) {
-            // ignored
         } catch (IOException e) {
 
         } finally {
@@ -116,7 +108,7 @@ public final class GetParkingTask extends AsyncTask<Void, Void, ParkingSpaces> {
     }
 
     private void sendNotification(ParkingSpaces parkingSpaces) {
-        mNotificationManager = (NotificationManager) mainActivity.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationmanager = (NotificationManager) mainActivity.getSystemService(Context.NOTIFICATION_SERVICE);
         //Build the notification using Notification.Builder
         Notification.Builder builder = new Notification.Builder(mainActivity.getApplicationContext())
                 .setSmallIcon(R.drawable.ic_logo)
@@ -126,7 +118,7 @@ public final class GetParkingTask extends AsyncTask<Void, Void, ParkingSpaces> {
 
 
         //Show the notification
-        mNotificationManager.notify(NOTIFICATION_ID, builder.build());
+        notificationmanager.notify(NOTIFICATION_ID, builder.build());
     }
 
     private void setVisibility(int textViewVisibility, int progressBarVisibility) {

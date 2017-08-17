@@ -16,50 +16,50 @@ public class SliderPreference extends ListPreference implements SeekBar.OnSeekBa
 
     private static final String androidns = "http://schemas.android.com/apk/res/android";
 
-    private SeekBar mSeekBar;
-    private TextView mSplashText, mValueText;
-    private Context mContext;
+    private SeekBar seekbar;
+    private TextView splashtext, valuetext;
+    private final Context context;
 
-    private String mDialogMessage;
+    private final String dialogmessage;
 
 
     public SliderPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        mContext = context;
+        this.context = context;
 
         // Get string value for dialogMessage :
-        int mDialogMessageId = attrs.getAttributeResourceValue(androidns, "dialogMessage", 0);
-        if (mDialogMessageId == 0)
-            mDialogMessage = attrs.getAttributeValue(androidns, "dialogMessage");
-        else mDialogMessage = mContext.getString(mDialogMessageId);
+        int dialogmessageid = attrs.getAttributeResourceValue(androidns, "dialogMessage", 0);
+        if  (dialogmessageid == 0)
+            dialogmessage = attrs.getAttributeValue(androidns, "dialogMessage");
+        else dialogmessage = context.getString (dialogmessageid);
     }
 
     @Override
     protected View onCreateDialogView() {
 
         LinearLayout.LayoutParams params;
-        LinearLayout layout = new LinearLayout(mContext);
+        LinearLayout layout = new LinearLayout (context);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(6, 6, 6, 6);
 
-        mSplashText = new TextView(mContext);
-        mSplashText.setPadding(30, 10, 30, 10);
-        if (mDialogMessage != null)
-            mSplashText.setText(mDialogMessage);
-        layout.addView(mSplashText);
+        splashtext = new TextView (context);
+        splashtext.setPadding(30, 10, 30, 10);
+        if  (dialogmessage != null)
+            splashtext.setText (dialogmessage);
+        layout.addView (splashtext);
 
-        mValueText = new TextView(mContext);
-        mValueText.setGravity(Gravity.CENTER_HORIZONTAL);
-        mValueText.setTextSize(32);
+        valuetext = new TextView (context);
+        valuetext.setGravity(Gravity.CENTER_HORIZONTAL);
+        valuetext.setTextSize(32);
         params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
-        layout.addView(mValueText, params);
+        layout.addView (valuetext, params);
 
-        mSeekBar = new SeekBar(mContext);
-        mSeekBar.setOnSeekBarChangeListener(this);
-        layout.addView(mSeekBar, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        seekbar = new SeekBar (context);
+        seekbar.setOnSeekBarChangeListener(this);
+        layout.addView (seekbar, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
         setProgressBarValue();
 
@@ -72,15 +72,15 @@ public class SliderPreference extends ListPreference implements SeekBar.OnSeekBa
     }
 
     private void setProgressBarValue() {
-        String mValue = null;
+        String value = null;
         if (shouldPersist()) {
-            mValue = getValue();
+            value = getValue();
         }
 
         final int max = this.getEntries().length - 1;
 
-        mSeekBar.setMax(max);
-        mSeekBar.setProgress(this.findIndexOfValue(mValue));
+        seekbar.setMax(max);
+        seekbar.setProgress(this.findIndexOfValue (value));
     }
 
     @Override
@@ -92,7 +92,7 @@ public class SliderPreference extends ListPreference implements SeekBar.OnSeekBa
     @Override
     public void onProgressChanged(SeekBar seek, int value, boolean fromTouch) {
         final CharSequence textToDisplay = getEntryFromValue(value);
-        mValueText.setText(textToDisplay);
+        valuetext.setText(textToDisplay);
     }
 
     private CharSequence getEntryFromValue(int value) {
@@ -120,7 +120,7 @@ public class SliderPreference extends ListPreference implements SeekBar.OnSeekBa
     public void onClick(View v) {
 
         if (shouldPersist()) {
-            final int progressChoice = mSeekBar.getProgress();
+            final int progressChoice = seekbar.getProgress();
             setValueIndex(progressChoice);
         }
 
